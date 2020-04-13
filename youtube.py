@@ -5,14 +5,11 @@ def getVideoData(videoId,other=False):
   get = get("https://www.youtube.com/oembed?format=json&url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3D" + videoId)
   json = eval(str(get.json()))
   link = "https://www.youtube.com/watch?v="+videoId
+  
+  #check if user doesn't want extra data
   if other == False:
     del json["html"],json["thumbnail_width"],json["thumbnail_height"],json["height"],json["width"],json["version"],json["thumbnail_url"], json["provider_name"],json["type"],json["provider_url"]
     
-  #update json
-  json["title"] = str(json['title'])
-  json['author_name'] = str(json['author_name'])
-  json['author_url'] = str(json['author_url'])
-  json["data_type"] = "video"
   return json,link
 
 def getChannelData(channelId):
